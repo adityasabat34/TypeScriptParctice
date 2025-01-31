@@ -15,29 +15,37 @@ type Person = {
   user: string;
   age: number;
   isStudent: boolean;
-  address: Address;
 };
 let person1: Person = {
   user: "aditya",
   age: 32,
   isStudent: false,
-  address: {
-    street: "Chmebuty",
-    city: "Mumbai",
-    country: "India",
-  },
 };
 
 let peroson2: Person = {
   user: "sahil",
   age: 21,
   isStudent: true,
-  address: {
-    street: "Chmebuty",
-    city: "Mumbai",
-    country: "India",
-  },
 };
+
+// let people: Person[{}] = [
+//   {
+//     person1: {
+//       user: "Aditya",
+//       age: 43,
+//       isStudent: true,
+//     },
+//   },
+//   {
+//     person3: {
+//       user: "Aditi",
+//       age: 23,
+//       isStudent: true,
+//     },
+//   },
+// ];
+
+let people: Array<Person> = [person1, peroson2];
 
 //////////////////////////////////////////////////////////////////////////
 type PizzaDataType = {
@@ -51,3 +59,11 @@ let menu: PizzaDataType[] = [
     price: 200,
   },
 ];
+
+type Order = {
+  id: number;
+  pizza: PizzaDataType;
+  status: boolean;
+};
+
+let count: number[] = [23, 3];
