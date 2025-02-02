@@ -1,69 +1,60 @@
-let uame: string = "adi";
-let numberofSame: number = 33;
-
-let isTrue: boolean = true;
-
-////////////////////////////////////////////////////////
-
-type Address = {
-  street: string;
-  city: string;
-  country: string;
-};
-
-type Person = {
-  user: string;
-  age: number;
-  isStudent: boolean;
-};
-let person1: Person = {
-  user: "aditya",
-  age: 32,
-  isStudent: false,
-};
-
-let peroson2: Person = {
-  user: "sahil",
-  age: 21,
-  isStudent: true,
-};
-
-// let people: Person[{}] = [
-//   {
-//     person1: {
-//       user: "Aditya",
-//       age: 43,
-//       isStudent: true,
-//     },
-//   },
-//   {
-//     person3: {
-//       user: "Aditi",
-//       age: 23,
-//       isStudent: true,
-//     },
-//   },
-// ];
-
-let people: Array<Person> = [person1, peroson2];
-
-//////////////////////////////////////////////////////////////////////////
-type PizzaDataType = {
+type Pizza = {
   name: string;
   price: number;
 };
 
-let menu: PizzaDataType[] = [
-  {
-    name: "Maghaerita",
-    price: 200,
-  },
-];
-
 type Order = {
   id: number;
-  pizza: PizzaDataType;
-  status: boolean;
+  pizza: Pizza;
+  status: string;
 };
 
-let count: number[] = [23, 3];
+const menu = [
+  { name: "margherita", price: 200 },
+  { name: "Ciekn", price: 200 },
+  { name: "margha", price: 200 },
+  { name: "mta", price: 200 },
+  { name: "margita", price: 200 },
+];
+
+// let orderQueue = [];
+
+let cashInRegister = 100;
+let nextOrderId = 1;
+const orderHistory: Order[] = [];
+
+function addNewPizza(pizzaObj: Pizza) {
+  menu.push(pizzaObj);
+}
+
+function placeOrder(pizzaName: string) {
+  const selectedPizza = menu.find((pizzaObj) => pizzaObj.name === pizzaName);
+  if (!selectedPizza) {
+    console.error(`${pizzaName} does not exist in the menu`);
+    return;
+  }
+  cashInRegister += selectedPizza.price;
+  const newOrder = { id: nextOrderId, pizza: selectedPizza, status: "ordered" };
+  nextOrderId++;
+  orderHistory.push(newOrder);
+  return newOrder;
+}
+
+function completeOrder(orderId: number) {
+  const order = orderHistory.find((order) => order.id === orderId);
+  if (!order) {
+    console.error(`${orderId} was not found in the orderQueue`);
+    return;
+  }
+  order.status = "completed";
+  return order;
+}
+
+addNewPizza({ name: "chicken", price: 300 });
+
+placeOrder("chiken");
+completeOrder(1);
+
+console.log(menu);
+console.log(cashInRegister);
+console.log(orderHistory);
